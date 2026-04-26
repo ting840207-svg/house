@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>台中找房 · 智慧搜尋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #9A7530;
+    --ink: #1A1A1A;
+    --ink-soft: #3D3D3D;
+    --paper: #F9F6F0;
+    --paper-dark: #EDE9E0;
+    --white: #FFFFFF;
+    --red: #C0392B;
+    --shadow: 0 4px 24px rgba(0,0,0,0.10);
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--paper); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+header { background: var(–ink); padding: 20px 20px 16px; position: sticky; top: 0; z-index: 100; }
+header h1 { font-family: ‘Noto Serif TC’, serif; font-weight: 900; font-size: 22px; color: var(–gold); letter-spacing: 2px; }
+header p { font-size: 11px; color: #aaa; margin-top: 2px; letter-spacing: 1px; }
+
+.filter-section { background: var(–white); padding: 20px; border-bottom: 1px solid var(–paper-dark); }
+.filter-title { font-size: 11px; font-weight: 500; color: #999; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.filter-group { margin-bottom: 18px; }
+.filter-group:last-child { margin-bottom: 0; }
+.filter-label { font-family: ‘Noto Serif TC’, serif; font-size: 13px; font-weight: 600; color: var(–ink); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 7px 14px; border-radius: 100px; border: 1.5px solid #DDD; background: var(–white); font-family: ‘Noto Sans TC’, sans-serif; font-size: 13px; color: var(–ink-soft); cursor: pointer; transition: all 0.18s ease; user-select: none; white-space: nowrap; }
+.chip:active { transform: scale(0.96); }
+.chip.active { background: var(–ink); border-color: var(–ink); color: var(–gold); font-weight: 500; }
+
+.search-bar { padding: 14px 20px; background: var(–white); border-bottom: 1px solid var(–paper-dark); display: flex; gap: 10px; align-items: center; }
+.btn-search { flex: 1; padding: 14px; background: var(–gold); border: none; border-radius: 12px; font-family: ‘Noto Serif TC’, serif; font-size: 15px; font-weight: 600; color: var(–ink); cursor: pointer; letter-spacing: 1px; transition: all 0.18s; }
+.btn-search:active { transform: scale(0.98); background: var(–gold-dark); color: #fff; }
+.btn-reset { padding: 14px 16px; background: transparent; border: 1.5px solid #DDD; border-radius: 12px; font-size: 13px; color: #999; cursor: pointer; white-space: nowrap; }
+
+.result-area { padding: 16px 16px 80px; }
+.result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding: 0 4px; }
+.result-count { font-family: ‘Noto Serif TC’, serif; font-size: 13px; color: var(–ink-soft); }
+.result-count span { font-size: 22px; font-weight: 900; color: var(–gold-dark); margin-right: 4px; }
+
+.state-box { text-align: center; padding: 60px 20px; color: #bbb; }
+.state-box .emoji { font-size: 48px; margin-bottom: 12px; }
+.state-box p { font-size: 14px; line-height: 1.8; }
+
+.card { background: var(–white); border-radius: var(–radius); overflow: hidden; margin-bottom: 14px; box-shadow: var(–shadow); transition: transform 0.18s; }
+.card:active { transform: scale(0.99); }
+.card-img { width: 100%; height: 190px; background: linear-gradient(135deg, #e0d9cc, #cdc4b2); display: flex; align-items: center; justify-content: center; font-size: 40px; position: relative; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+.card-badge { position: absolute; top: 10px; right: 10px; background: var(–ink); color: var(–gold); font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 100px; letter-spacing: 1px; }
+.card-badge.sale { background: var(–gold); color: var(–ink); }
+.card-body { padding: 14px 16px 16px; }
+.card-area { font-size: 11px; font-weight: 500; color: var(–gold-dark); letter-spacing: 2px; margin-bottom: 6px; }
+.card-title { font-family: ‘Noto Serif TC’, serif; font-size: 16px; font-weight: 600; color: var(–ink); line-height: 1.4; margin-bottom: 10px; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.tag { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(–paper-dark); color: var(–ink-soft); }
+.card-price { font-family: ‘Noto Serif TC’, serif; font-size: 22px; font-weight: 900; color: var(–red); letter-spacing: 0.5px; }
+.card-price small { font-size: 12px; font-weight: 400; color: #aaa; margin-left: 4px; font-family: ‘Noto Sans TC’, sans-serif; }
+.card-footer { display: flex; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(–paper-dark); }
+.btn-detail { flex: 1; padding: 10px; border: 1.5px solid var(–gold); border-radius: 10px; background: transparent; color: var(–gold-dark); font-size: 13px; font-weight: 500; cursor: pointer; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.btn-contact { flex: 1; padding: 10px; border: none; border-radius: 10px; background: var(–ink); color: var(–gold); font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid #eee; border-top-color: var(–gold); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.notice { background: #FFF8E7; border: 1px solid #F0D87A; border-radius: 12px; padding: 12px 16px; font-size: 12px; color: #8A6A00; margin-bottom: 14px; line-height: 1.6; }
+html { scroll-behavior: smooth; }
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>台中找房 · 智慧搜尋</h1>
+  <p>依條件篩選，找到您理想的家</p>
+</header>
+
+<div class="filter-section">
+  <div class="filter-title">篩選條件</div>
+
+  <div class="filter-group">
+    <div class="filter-label"><span>📍</span>地區</div>
+    <div class="chip-row" id="chips-area">
+      <div class="chip active" data-val="">全部</div>
+      <div class="chip" data-val="北區">北區</div>
+      <div class="chip" data-val="北屯區">北屯區</div>
+      <div class="chip" data-val="南區">南區</div>
+      <div class="chip" data-val="南屯區">南屯區</div>
+      <div class="chip" data-val="西區">西區</div>
+      <div class="chip" data-val="西屯區">西屯區</div>
+      <div class="chip" data-val="大里太平">大里太平</div>
+      <div class="chip" data-val="其他區">其他區</div>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <div class="filter-label"><span>🏠</span>格局</div>
+    <div class="chip-row" id="chips-layout">
+      <div class="chip active" data-val="">全部</div>
+      <div class="chip" data-val="1房">1房</div>
+      <div class="chip" data-val="2房">2房</div>
+      <div class="chip" data-val="3房">3房</div>
+      <div class="chip" data-val="4房">4房</div>
+      <div class="chip" data-val="4房以上">4房以上</div>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <div class="filter-label"><span>📐</span>坪數</div>
+    <div class="chip-row" id="chips-size">
+      <div class="chip active" data-val="">全部</div>
+      <div class="chip" data-val="20以下">20坪以下</div>
+      <div class="chip" data-val="20-30">20－30坪</div>
+      <div class="chip" data-val="30-40">30－40坪</div>
+      <div class="chip" data-val="40-50">40－50坪</div>
+      <div class="chip" data-val="50以上">50坪以上</div>
+    </div>
+  </div>
+
+  <div class="filter-group">
+    <div class="filter-label"><span>💰</span>預算</div>
+    <div class="chip-row" id="chips-budget">
+      <div class="chip active" data-val="">全部</div>
+      <div class="chip" data-val="500以下">500萬以下</div>
+      <div class="chip" data-val="500-800">500－800萬</div>
+      <div class="chip" data-val="800-1200">800萬－1200萬</div>
+      <div class="chip" data-val="1200-2000">1200萬－2000萬</div>
+      <div class="chip" data-val="2000以上">2000萬以上</div>
+    </div>
+  </div>
+</div>
+
+<div class="search-bar">
+  <button class="btn-search" onclick="doSearch()">🔍 搜尋物件</button>
+  <button class="btn-reset" onclick="resetAll()">重置</button>
+</div>
+
+<div class="result-area" id="resultArea">
+  <div class="state-box">
+    <div class="emoji">🏡</div>
+    <p>選擇您的需求條件<br>按下搜尋，找到理想物件</p>
+  </div>
+</div>
+
+<script>
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXlS27w3RSA6QVdQV8EwHg0AUm2uXlcqsoNPKrqNsTKyuvxQNeuK5rD81KT4-qDLNcife2e_hYUj7g/pub?gid=0&single=true&output=csv';
+const LINE_ID = '@107chjwb';
+const AGENT_PHONE = '0908780207';
+
+const DEMO_DATA = [
+  { 標題:'七期豪宅整層釋出', 地區:'西屯區', 格局:'4房', 坪數:'58', 價格:'3800', 類型:'住宅', 圖片:'', 說明:'精裝修，棟距佳，視野開闊，近秀泰廣場，生活機能頂佳。', 物件連結:'' },
+  { 標題:'北屯近崇德捷運口電梯大樓', 地區:'北屯區', 格局:'3房', 坪數:'38', 價格:'1080', 類型:'住宅', 圖片:'', 說明:'管理完善社區，機車位，近崇德路商圈，學區佳。', 物件連結:'' },
+  { 標題:'南屯公益路精華地段', 地區:'南屯區', 格局:'2房', 坪數:'27', 價格:'750', 類型:'住宅', 圖片:'', 說明:'格局方正，採光充足，近大買家，周邊生活機能完善。', 物件連結:'' },
+  { 標題:'北區電梯華廈三房兩廳', 地區:'北區', 格局:'3房', 坪數:'35', 價格:'920', 類型:'住宅', 圖片:'', 說明:'近中國醫，學區好，管理嚴謹，社區品質高。', 物件連結:'' },
+  { 標題:'西區民生路老宅翻新', 地區:'西區', 格局:'2房', 坪數:'24', 價格:'580', 類型:'住宅', 圖片:'', 說明:'全新裝修，近第五市場，生活便利，交通方便。', 物件連結:'' },
+  { 標題:'大里透天4房車庫', 地區:'大里太平', 格局:'4房', 坪數:'45', 價格:'1350', 類型:'透天', 圖片:'', 說明:'附雙車庫，花園，安靜社區，近大里高中。', 物件連結:'' },
+  { 標題:'南區美村路溫馨一房', 地區:'南區', 格局:'1房', 坪數:'15', 價格:'350', 類型:'住宅', 圖片:'', 說明:'近興大，適自住或投資，租金行情約10000/月。', 物件連結:'' },
+  { 標題:'西屯台灣大道四段辦公套房', 地區:'西屯區', 格局:'2房', 坪數:'22', 價格:'480', 類型:'住宅', 圖片:'', 說明:'管理嚴謹，視野好，近台中榮總，交通便捷。', 物件連結:'' },
+];
+
+let allData = [];
+let isDemo = false;
+const filters = { area:'', layout:'', size:'', budget:'' };
+
+document.querySelectorAll('.chip-row').forEach(function(row) {
+  var key = row.id.replace('chips-','');
+  row.querySelectorAll('.chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      row.querySelectorAll('.chip').forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      filters[key] = chip.getAttribute('data-val');
+    });
+  });
+});
+
+function resetAll() {
+  ['chips-area','chips-layout','chips-size','chips-budget'].forEach(function(id) {
+    var row = document.getElementById(id);
+    var chips = row.querySelectorAll('.chip');
+    chips.forEach(function(c, i) { c.classList.toggle('active', i === 0); });
+  });
+  filters.area = ''; filters.layout = ''; filters.size = ''; filters.budget = '';
+  document.getElementById('resultArea').innerHTML = '<div class="state-box"><div class="emoji">🏡</div><p>選擇您的需求條件<br>按下搜尋，找到理想物件</p></div>';
+}
+
+async function doSearch() {
+  var ra = document.getElementById('resultArea');
+  ra.innerHTML = '<div class="state-box"><span class="spinner"></span> 搜尋中...</div>';
+  if (allData.length === 0) { await loadData(); }
+  var results = allData.filter(function(p) { return matchFilter(p); });
+  if (results.length === 0) {
+    ra.innerHTML = '<div class="state-box"><div class="emoji">😔</div><p>找不到符合條件的物件<br>請試試調整篩選條件</p></div>';
+    return;
+  }
+  var html = '';
+  if (isDemo) { html += '<div class="notice">⚠️ 目前顯示示範資料。請確認 Google Sheets 已正確發布。</div>'; }
+  html += '<div class="result-header"><div class="result-count"><span>' + results.length + '</span>件符合物件</div></div>';
+  results.forEach(function(p) { html += renderCard(p); });
+  ra.innerHTML = html;
+  ra.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function matchFilter(p) {
+  if (filters.area && p['地區'] !== filters.area) return false;
+  if (filters.layout && p['格局'] !== filters.layout) return false;
+  if (filters.size) {
+    var s = parseFloat(p['坪數']) || 0;
+    if (filters.size === '20以下' && s >= 20) return false;
+    if (filters.size === '20-30' && (s < 20 || s >= 30)) return false;
+    if (filters.size === '30-40' && (s < 30 || s >= 40)) return false;
+    if (filters.size === '40-50' && (s < 40 || s >= 50)) return false;
+    if (filters.size === '50以上' && s < 50) return false;
+  }
+  if (filters.budget) {
+    var b = parseFloat(p['價格']) || 0;
+    if (filters.budget === '500以下' && b >= 500) return false;
+    if (filters.budget === '500-800' && (b < 500 || b >= 800)) return false;
+    if (filters.budget === '800-1200' && (b < 800 || b >= 1200)) return false;
+    if (filters.budget === '1200-2000' && (b < 1200 || b >= 2000)) return false;
+    if (filters.budget === '2000以上' && b < 2000) return false;
+  }
+  return true;
+}
+
+async function loadData() {
+  try {
+    var r = await fetch(SHEET_CSV_URL);
+    var text = await r.text();
+    var parsed = parseCSV(text);
+    if (parsed.length > 0) { allData = parsed; isDemo = false; return; }
+  } catch(e) {}
+  allData = DEMO_DATA;
+  isDemo = true;
+}
+
+function parseCSV(text) {
+  var lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  var headers = lines[0].split(',').map(function(h) { return h.trim().replace(/^"|"$/g,''); });
+  return lines.slice(1).map(function(line) {
+    var vals = splitCSVLine(line);
+    var obj = {};
+    headers.forEach(function(h, i) { obj[h] = (vals[i]||'').trim().replace(/^"|"$/g,''); });
+    return obj;
+  }).filter(function(o) { return o['標題']; });
+}
+
+function splitCSVLine(line) {
+  var result = []; var cur = ''; var inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    if (line[i] === '"') { inQ = !inQ; continue; }
+    if (line[i] === ',' && !inQ) { result.push(cur); cur = ''; continue; }
+    cur += line[i];
+  }
+  result.push(cur);
+  return result;
+}
+
+function renderCard(p) {
+  var price = parseFloat(p['價格']) || 0;
+  var priceStr = price >= 10000 ? (price/10000).toFixed(1)+'億' : price+'萬';
+  var imgEmoji = p['類型'] === '透天' ? '🏘️' : '🏢';
+  var desc = p['說明'] || '';
+  var shortDesc = desc.length > 20 ? desc.slice(0,20)+'...' : desc;
+  var hasLink = p['物件連結'] && p['物件連結'].length > 0;
+  var detailBtn = hasLink
+    ? '<a class="btn-detail" href="' + p['物件連結'] + '" target="_blank">📋 詳細資訊</a>'
+    : '<button class="btn-detail" onclick="showDetail(\'' + encodeURIComponent(JSON.stringify(p)) + '\')">📋 物件詳情</button>';
+  return '<div class="card">'
+    + '<div class="card-img">'
+    + (p['圖片'] ? '<img src="' + p['圖片'] + '" alt="' + p['標題'] + '" onerror="this.style.display=\'none\'">' : '')
+    + '<span>' + imgEmoji + '</span>'
+    + '<span class="card-badge sale">' + (p['類型']||'住宅') + '</span>'
+    + '</div>'
+    + '<div class="card-body">'
+    + '<div class="card-area">📍 ' + p['地區'] + '</div>'
+    + '<div class="card-title">' + p['標題'] + '</div>'
+    + '<div class="card-tags">'
+    + (p['格局'] ? '<span class="tag">' + p['格局'] + '</span>' : '')
+    + (p['坪數'] ? '<span class="tag">' + p['坪數'] + '坪</span>' : '')
+    + (shortDesc ? '<span class="tag">' + shortDesc + '</span>' : '')
+    + '</div>'
+    + '<div class="card-price">' + priceStr + '<small>（總價）</small></div>'
+    + '<div class="card-footer">' + detailBtn
+    + '<button class="btn-contact" onclick="contactAgent()">💬 聯絡仲介</button>'
+    + '</div></div></div>';
+}
+
+function showDetail(encoded) {
+  var p = JSON.parse(decodeURIComponent(encoded));
+  alert('📋 ' + p['標題'] + '\n\n地區：' + p['地區'] + '\n格局：' + p['格局'] + '\n坪數：' + p['坪數'] + '坪\n售價：' + p['價格'] + '萬\n\n' + (p['說明']||'請聯絡仲介了解更多詳情。'));
+}
+
+function contactAgent() {
+  window.open('https://line.me/R/ti/p/' + LINE_ID, '_blank');
+}
+</script>
+
+</body>
+</html>
