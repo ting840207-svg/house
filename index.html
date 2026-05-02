@@ -60,27 +60,38 @@ header p{font-size:11px;color:#aaa;margin-top:2px;letter-spacing:1px;}
 .notice{background:#FFF8E7;border:1px solid #F0D87A;border-radius:12px;padding:12px 16px;font-size:12px;color:#8A6A00;margin-bottom:14px;line-height:1.6;}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid #eee;border-top-color:var(--gold);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}
 @keyframes spin{to{transform:rotate(360deg);}}
+
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;align-items:flex-end;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--white);border-radius:24px 24px 0 0;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:24px 20px 40px;animation:slideUp 0.3s ease;}
+.modal{background:var(–white);border-radius:24px 24px 0 0;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:24px 20px 40px;animation:slideUp 0.3s ease;}
 @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
 .modal-handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 20px;}
-.modal-title{font-family:'Noto Serif TC',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.modal-title{font-family:‘Noto Serif TC’,serif;font-size:18px;font-weight:700;color:var(–ink);margin-bottom:4px;}
 .modal-sub{font-size:12px;color:#aaa;margin-bottom:20px;}
-.modal-prop{background:var(--paper);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--ink-soft);margin-bottom:20px;font-weight:500;}
+.modal-prop{background:var(–paper);border-radius:10px;padding:10px 14px;font-size:13px;color:var(–ink-soft);margin-bottom:20px;font-weight:500;}
 .form-group{margin-bottom:16px;}
-.form-label{font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:6px;display:block;letter-spacing:0.5px;}
-.form-input,.form-select,.form-textarea{width:100%;padding:12px 14px;border:1.5px solid #E0E0E0;border-radius:10px;font-family:'Noto Sans TC',sans-serif;font-size:14px;color:var(--ink);background:var(--white);outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-label{font-size:12px;font-weight:600;color:var(–ink-soft);margin-bottom:6px;display:block;letter-spacing:0.5px;}
+.form-input,.form-select,.form-textarea{width:100%;padding:12px 14px;border:1.5px solid #E0E0E0;border-radius:10px;font-family:‘Noto Sans TC’,sans-serif;font-size:14px;color:var(–ink);background:var(–white);outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(–gold);}
 .form-textarea{resize:none;height:80px;line-height:1.6;}
 .time-chips{display:flex;flex-wrap:wrap;gap:8px;}
-.time-chip{padding:8px 14px;border-radius:100px;border:1.5px solid #DDD;background:var(--white);font-size:13px;color:var(--ink-soft);cursor:pointer;transition:all 0.18s;user-select:none;}
-.time-chip.active{background:var(--ink);border-color:var(--ink);color:var(--gold);}
-.btn-submit{width:100%;padding:15px;background:var(--gold);border:none;border-radius:12px;font-family:'Noto Serif TC',serif;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;margin-top:8px;letter-spacing:1px;}
-.btn-submit:active{background:var(--gold-dark);color:#fff;}
+.time-chip{padding:8px 14px;border-radius:100px;border:1.5px solid #DDD;background:var(–white);font-size:13px;color:var(–ink-soft);cursor:pointer;transition:all 0.18s;user-select:none;}
+.time-chip.active{background:var(–ink);border-color:var(–ink);color:var(–gold);}
+.btn-submit{width:100%;padding:15px;background:var(–gold);border:none;border-radius:12px;font-family:‘Noto Serif TC’,serif;font-size:16px;font-weight:700;color:var(–ink);cursor:pointer;margin-top:8px;letter-spacing:1px;}
+.btn-submit:active{background:var(–gold-dark);color:#fff;}
+.btn-submit:disabled{background:#ccc;color:#888;cursor:not-allowed;}
 .btn-cancel{width:100%;padding:12px;background:transparent;border:none;font-size:14px;color:#aaa;cursor:pointer;margin-top:8px;}
+
+/* SUCCESS */
+.success-box{text-align:center;padding:40px 20px;}
+.success-box .s-emoji{font-size:56px;margin-bottom:16px;}
+.success-box h3{font-family:‘Noto Serif TC’,serif;font-size:20px;font-weight:700;color:var(–ink);margin-bottom:8px;}
+.success-box p{font-size:13px;color:#888;line-height:1.8;}
+
 html{scroll-behavior:smooth;}
 </style>
+
 </head>
 <body>
 
@@ -152,66 +163,85 @@ html{scroll-behavior:smooth;}
   </div>
 </div>
 
+<!-- MODAL -->
+
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modalBox">
     <div class="modal-handle"></div>
-    <div class="modal-title">📅 預約看房</div>
-    <div class="modal-sub">填寫資料後，仲介將盡快與您確認時間</div>
-    <div class="modal-prop" id="modalPropName">物件名稱</div>
-    <div class="form-group">
-      <label class="form-label">您的姓名 *</label>
-      <input class="form-input" id="f-name" type="text" placeholder="請輸入姓名">
-    </div>
-    <div class="form-group">
-      <label class="form-label">聯絡電話 *</label>
-      <input class="form-input" id="f-phone" type="tel" placeholder="請輸入手機號碼">
-    </div>
-    <div class="form-group">
-      <label class="form-label">希望看房時段（可複選）</label>
-      <div class="time-chips">
-        <div class="time-chip" data-val="平日上午">平日上午</div>
-        <div class="time-chip" data-val="平日下午">平日下午</div>
-        <div class="time-chip" data-val="平日晚上">平日晚上</div>
-        <div class="time-chip" data-val="假日上午">假日上午</div>
-        <div class="time-chip" data-val="假日下午">假日下午</div>
-        <div class="time-chip" data-val="假日晚上">假日晚上</div>
+    <div id="formArea">
+      <div class="modal-title">📅 預約看房</div>
+      <div class="modal-sub">填寫資料後將自動通知仲介，無需額外操作</div>
+      <div class="modal-prop" id="modalPropName">物件名稱</div>
+      <div class="form-group">
+        <label class="form-label">您的姓名 *</label>
+        <input class="form-input" id="f-name" type="text" placeholder="請輸入姓名">
       </div>
+      <div class="form-group">
+        <label class="form-label">聯絡電話 *</label>
+        <input class="form-input" id="f-phone" type="tel" placeholder="請輸入手機號碼">
+      </div>
+      <div class="form-group">
+        <label class="form-label">希望看房時段（可複選）</label>
+        <div class="time-chips">
+          <div class="time-chip" data-val="平日上午">平日上午</div>
+          <div class="time-chip" data-val="平日下午">平日下午</div>
+          <div class="time-chip" data-val="平日晚上">平日晚上</div>
+          <div class="time-chip" data-val="假日上午">假日上午</div>
+          <div class="time-chip" data-val="假日下午">假日下午</div>
+          <div class="time-chip" data-val="假日晚上">假日晚上</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">預算範圍</label>
+        <select class="form-select" id="f-budget">
+          <option value="">請選擇</option>
+          <option>500萬以下</option>
+          <option>500-800萬</option>
+          <option>800-1200萬</option>
+          <option>1200-1600萬</option>
+          <option>1600-2000萬</option>
+          <option>2000萬以上</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">想了解的問題</label>
+        <textarea class="form-textarea" id="f-question" placeholder="例如：車位情況、管理費、附近學區..."></textarea>
+      </div>
+      <button class="btn-submit" id="submitBtn" onclick="submitBooking()">📅 送出預約</button>
+      <button class="btn-cancel" onclick="closeModalDirect()">取消</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">預算範圍</label>
-      <select class="form-select" id="f-budget">
-        <option value="">請選擇</option>
-        <option>500萬以下</option>
-        <option>500－800萬</option>
-        <option>800萬－1200萬</option>
-        <option>1200萬－2000萬</option>
-        <option>2000萬以上</option>
-      </select>
+    <div id="successArea" style="display:none;">
+      <div class="success-box">
+        <div class="s-emoji">🎉</div>
+        <h3>預約成功！</h3>
+        <p>您的預約資料已送出<br>仲介將盡快與您聯繫<br><br>感謝您的詢問！</p>
+      </div>
+      <button class="btn-submit" onclick="closeModalDirect()">關閉</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">想了解的問題</label>
-      <textarea class="form-textarea" id="f-question" placeholder="例如：車位情況、管理費、附近學區..."></textarea>
-    </div>
-    <button class="btn-submit" onclick="submitBooking()">💬 送出預約 · 開啟 LINE 聯繫</button>
-    <button class="btn-cancel" onclick="closeModalDirect()">取消</button>
   </div>
 </div>
 
 <script>
 var SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vTXlS27w3RSA6QVdQV8EwHg0AUm2uXlcqsoNPKrqNsTKyuvxQNeuK5rD81KT4-qDLNcife2e_hYUj7g/pub?gid=0&single=true&output=csv';
-var LINE_ID='@107chjwb';
-var DEMO_DATA=[
-  {标题:'七期豪宅整層釋出',地區:'西屯區',格局:'4房',坪數:'58',價格:'3800',類型:'住宅',圖片:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80',說明:'精裝修，棟距佳，視野開闊，近秀泰廣場，生活機能頂佳。',物件連結:''},
-  {标题:'北屯近崇德捷運口電梯大樓',地區:'北屯區',格局:'3房',坪數:'38',價格:'1080',類型:'住宅',圖片:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80',說明:'管理完善社區，機車位，近崇德路商圈，學區佳。',物件連結:''},
-  {标题:'南屯公益路精華地段',地區:'南屯區',格局:'2房',坪數:'27',價格:'750',類型:'住宅',圖片:'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80',說明:'格局方正，採光充足，近大買家，周邊生活機能完善。',物件連結:''},
-  {标题:'大里透天4房車庫',地區:'大里太平',格局:'4房',坪數:'45',價格:'1350',類型:'透天',圖片:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80',說明:'附雙車庫，花園，安靜社區，近大里高中。',物件連結:''},
-];
+var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSfpoj8kzu2Ea9iA5O51BJcO9Nl6S1bS8iQpEAn4Y7ycs2g1eQ/formResponse';
 
-// fix demo data key
-DEMO_DATA=DEMO_DATA.map(function(d){d['標題']=d['标题'];delete d['标题'];return d;});
+// Google 表單欄位 entry ID（依照你表單的欄位順序）
+var ENTRY_NAME='entry.986989577';
+var ENTRY_PHONE='entry.2019511183';
+var ENTRY_TIME='entry.1217101094';
+var ENTRY_BUDGET='entry.1019503682';
+var ENTRY_QUESTION='entry.196273080';
+var ENTRY_PROP='entry.735557003';
 
 var allData=[],isDemo=false,currentPropTitle='';
 var filters={area:'',layout:'',size:'',budget:''};
+
+var DEMO_DATA=[
+  {標題:'七期豪宅整層釋出',地區:'西屯區',格局:'4房',坪數:'58',價格:'3800',類型:'住宅',圖片:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80',說明:'精裝修，棟距佳，視野開闊，近秀泰廣場，生活機能頂佳。',物件連結:''},
+  {標題:'北屯近崇德捷運口電梯大樓',地區:'北屯區',格局:'3房',坪數:'38',價格:'1080',類型:'住宅',圖片:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80',說明:'管理完善社區，機車位，近崇德路商圈，學區佳。',物件連結:''},
+  {標題:'南屯公益路精華地段',地區:'南屯區',格局:'2房',坪數:'27',價格:'750',類型:'住宅',圖片:'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=600&q=80',說明:'格局方正，採光充足，近大買家，周邊生活機能完善。',物件連結:''},
+  {標題:'大里透天4房車庫',地區:'大里太平',格局:'4房',坪數:'45',價格:'1350',類型:'透天',圖片:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80',說明:'附雙車庫，花園，安靜社區，近大里高中。',物件連結:''},
+];
 
 document.querySelectorAll('.chip-row').forEach(function(row){
   var key=row.id.replace('chips-','');
@@ -360,29 +390,50 @@ function openModal(title){
   document.getElementById('f-budget').value='';
   document.getElementById('f-question').value='';
   document.querySelectorAll('.time-chip').forEach(function(c){c.classList.remove('active');});
+  document.getElementById('formArea').style.display='block';
+  document.getElementById('successArea').style.display='none';
+  document.getElementById('submitBtn').disabled=false;
+  document.getElementById('submitBtn').textContent='📅 送出預約';
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
+
 function closeModal(e){if(e.target===document.getElementById('modalOverlay'))closeModalDirect();}
 function closeModalDirect(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
 
-function submitBooking(){
+async function submitBooking(){
   var name=document.getElementById('f-name').value.trim();
   var phone=document.getElementById('f-phone').value.trim();
   if(!name||!phone){alert('請填寫姓名和電話！');return;}
+
   var times=[];
   document.querySelectorAll('.time-chip.active').forEach(function(c){times.push(c.getAttribute('data-val'));});
   var budget=document.getElementById('f-budget').value;
   var question=document.getElementById('f-question').value.trim();
-  var msg='您好！我想預約看房 🏠\n\n'
-    +'【物件】'+currentPropTitle+'\n'
-    +'【姓名】'+name+'\n'
-    +'【電話】'+phone+'\n'
-    +(times.length?'【方便時段】'+times.join('、')+'\n':'')
-    +(budget?'【預算範圍】'+budget+'\n':'')
-    +(question?'【想了解】'+question:'');
-  closeModalDirect();
-  window.open('https://line.me/R/ti/p/'+LINE_ID+'?text='+encodeURIComponent(msg),'_blank');
+
+  var btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  btn.textContent='送出中...';
+
+  try{
+    var body=new URLSearchParams();
+    body.append(ENTRY_NAME, name);
+    body.append(ENTRY_PHONE, phone);
+    body.append(ENTRY_TIME, times.join('、'));
+    body.append(ENTRY_BUDGET, budget);
+    body.append(ENTRY_QUESTION, question);
+    body.append(ENTRY_PROP, currentPropTitle);
+
+    await fetch(FORM_URL, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body: body.toString()
+    });
+  }catch(e){}
+
+  document.getElementById('formArea').style.display='none';
+  document.getElementById('successArea').style.display='block';
 }
 </script>
 
