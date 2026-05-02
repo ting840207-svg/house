@@ -255,7 +255,8 @@ var ENTRY={
   phone:'entry.1915564233',
   time:'entry.453865590',
   budget:'entry.2090899796',
-  question:'entry.180356946'
+  question:'entry.180356946',
+  prop:'entry.1990079237'
 };
 
 var allData=[],isDemo=false,currentPropTitle='';
@@ -399,6 +400,7 @@ async function submitBooking(){
   btn.disabled=true;btn.textContent='送出中...';
   try{
     var body=new URLSearchParams();
+    body.append(ENTRY.prop,currentPropTitle);
     body.append(ENTRY.name,name);
     body.append(ENTRY.phone,phone);
     body.append(ENTRY.time,times.length?times.join('、'):'未選擇');
