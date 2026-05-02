@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="zh-TW">
 <head>
@@ -410,6 +410,17 @@ async function submitBooking(){
   }catch(e){}
   document.getElementById('formArea').style.display='none';
   document.getElementById('successArea').style.display='block';
+  // 開啟 LINE 帶入預約內容
+  var lineMsg = '您好！我剛剛預約了看房\n\n'
+    + '【物件】' + currentPropTitle + '\n'
+    + '【姓名】' + name + '\n'
+    + '【電話】' + phone + '\n'
+    + (times.length ? '【時段】' + times.join('、') + '\n' : '')
+    + (budget ? '【預算】' + budget + '\n' : '')
+    + (question ? '【問題】' + question : '');
+  setTimeout(function(){
+    window.open('https://line.me/R/ti/p/@107chjwb?text=' + encodeURIComponent(lineMsg), '_blank');
+  }, 1000);
 }
 </script>
 
