@@ -197,6 +197,10 @@ html{scroll-behavior:smooth;}
       <div class="modal-sub">填寫資料後將自動通知仲介，無需額外操作</div>
       <div class="modal-prop" id="modalPropName">物件名稱</div>
       <div class="form-group">
+        <label class="form-label">您的 LINE 名稱 *</label>
+        <input class="form-input" id="f-linename" type="text" placeholder="請輸入您的 LINE 顯示名稱">
+      </div>
+      <div class="form-group">
         <label class="form-label">您的姓名 *</label>
         <input class="form-input" id="f-name" type="text" placeholder="請輸入姓名">
       </div>
@@ -251,6 +255,7 @@ var FORM_ACTION='https://docs.google.com/forms/d/e/1FAIpQLSfpoj8kzu2Ea9iA5O51BJc
 
 // ★ Google 表單 entry ID — 需要確認，先用佔位值
 var ENTRY={
+  lineName:'entry.1216308525',
   name:'entry.1421160139',
   phone:'entry.1915564233',
   time:'entry.453865590',
@@ -365,6 +370,7 @@ function goSlide(id,idx,total){var card=document.getElementById(id);if(!card)ret
 function openModal(title){
   currentPropTitle=title;
   document.getElementById('modalPropName').textContent='🏠 '+title;
+  document.getElementById('f-linename').value='';
   document.getElementById('f-name').value='';
   document.getElementById('f-phone').value='';
   document.getElementById('f-budget').value='';
@@ -389,9 +395,10 @@ document.getElementById('modalOverlay').addEventListener('click',function(e){
 });
 
 async function submitBooking(){
+  var lineName=document.getElementById('f-linename').value.trim();
   var name=document.getElementById('f-name').value.trim();
   var phone=document.getElementById('f-phone').value.trim();
-  if(!name||!phone){alert('請填寫姓名和電話！');return;}
+  if(!lineName||!name||!phone){alert('請填寫 LINE 名稱、姓名和電話！');return;}
   var times=[];
   document.querySelectorAll('.time-chip.active').forEach(function(c){times.push(c.getAttribute('data-val'));});
   var budget=document.getElementById('f-budget').value;
@@ -400,6 +407,7 @@ async function submitBooking(){
   btn.disabled=true;btn.textContent='送出中...';
   try{
     var body=new URLSearchParams();
+    body.append(ENTRY.lineName,lineName);
     body.append(ENTRY.prop,currentPropTitle);
     body.append(ENTRY.name,name);
     body.append(ENTRY.phone,phone);
