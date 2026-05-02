@@ -43,8 +43,7 @@ header p{font-size:11px;color:#aaa;margin-top:2px;letter-spacing:1px;}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);cursor:pointer;transition:background 0.2s;}
 .dot.active{background:#fff;}
 .slide-prev,.slide-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);color:#fff;border:none;border-radius:50%;width:30px;height:30px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.slide-prev{left:8px;}
-.slide-next{right:8px;}
+.slide-prev{left:8px;}.slide-next{right:8px;}
 .card-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--ink);font-size:11px;font-weight:500;padding:4px 10px;border-radius:100px;letter-spacing:1px;z-index:2;}
 .card-body{padding:14px 16px 16px;}
 .card-area{font-size:11px;font-weight:500;color:var(--gold-dark);letter-spacing:2px;margin-bottom:6px;}
@@ -55,40 +54,65 @@ header p{font-size:11px;color:#aaa;margin-top:2px;letter-spacing:1px;}
 .card-price{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:900;color:var(--red);}
 .card-price small{font-size:12px;font-weight:400;color:#aaa;margin-left:4px;font-family:'Noto Sans TC',sans-serif;}
 .card-footer{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--paper-dark);}
-.btn-detail{flex:1;padding:10px;border:1.5px solid var(--gold);border-radius:10px;background:transparent;color:var(--gold-dark);font-size:13px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px;}
+.btn-detail{flex:1;padding:10px;border:1.5px solid var(--gold);border-radius:10px;background:var(--white);color:var(--gold-dark);font-size:13px;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:4px;}
 .btn-book{flex:1;padding:10px;border:none;border-radius:10px;background:var(--ink);color:var(--gold);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;}
 .notice{background:#FFF8E7;border:1px solid #F0D87A;border-radius:12px;padding:12px 16px;font-size:12px;color:#8A6A00;margin-bottom:14px;line-height:1.6;}
 .spinner{display:inline-block;width:20px;height:20px;border:2px solid #eee;border-top-color:var(--gold);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:500;align-items:flex-end;justify-content:center;}
+/* ── MODAL：完全實體背景 ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:500;align-items:flex-end;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(–white);border-radius:24px 24px 0 0;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;padding:24px 20px 40px;animation:slideUp 0.3s ease;}
+.modal{
+background:#FFFFFF;
+border-radius:24px 24px 0 0;
+width:100%;
+max-width:480px;
+max-height:88vh;
+overflow-y:auto;
+padding:24px 20px 40px;
+animation:slideUp 0.3s ease;
+position:relative;
+z-index:501;
+-webkit-overflow-scrolling:touch;
+}
 @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
 .modal-handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 20px;}
-.modal-title{font-family:‘Noto Serif TC’,serif;font-size:18px;font-weight:700;color:var(–ink);margin-bottom:4px;}
-.modal-sub{font-size:12px;color:#aaa;margin-bottom:20px;}
-.modal-prop{background:var(–paper);border-radius:10px;padding:10px 14px;font-size:13px;color:var(–ink-soft);margin-bottom:20px;font-weight:500;}
+.modal-title{font-family:‘Noto Serif TC’,serif;font-size:18px;font-weight:700;color:#1A1A1A;margin-bottom:4px;}
+.modal-sub{font-size:12px;color:#999;margin-bottom:20px;}
+.modal-prop{background:#F9F6F0;border-radius:10px;padding:10px 14px;font-size:13px;color:#3D3D3D;margin-bottom:20px;font-weight:500;}
 .form-group{margin-bottom:16px;}
-.form-label{font-size:12px;font-weight:600;color:var(–ink-soft);margin-bottom:6px;display:block;letter-spacing:0.5px;}
-.form-input,.form-select,.form-textarea{width:100%;padding:12px 14px;border:1.5px solid #E0E0E0;border-radius:10px;font-family:‘Noto Sans TC’,sans-serif;font-size:14px;color:var(–ink);background:var(–white);outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(–gold);}
+.form-label{font-size:12px;font-weight:600;color:#3D3D3D;margin-bottom:6px;display:block;letter-spacing:0.5px;}
+.form-input,.form-select,.form-textarea{width:100%;padding:12px 14px;border:1.5px solid #E0E0E0;border-radius:10px;font-family:‘Noto Sans TC’,sans-serif;font-size:14px;color:#1A1A1A;background:#FFFFFF;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:#C9A84C;}
 .form-textarea{resize:none;height:80px;line-height:1.6;}
-.time-chips{display:flex;flex-wrap:wrap;gap:8px;}
-.time-chip{padding:8px 14px;border-radius:100px;border:1.5px solid #DDD;background:var(–white);font-size:13px;color:var(–ink-soft);cursor:pointer;transition:all 0.18s;user-select:none;}
-.time-chip.active{background:var(–ink);border-color:var(–ink);color:var(–gold);}
-.btn-submit{width:100%;padding:15px;background:var(–gold);border:none;border-radius:12px;font-family:‘Noto Serif TC’,serif;font-size:16px;font-weight:700;color:var(–ink);cursor:pointer;margin-top:8px;letter-spacing:1px;}
-.btn-submit:active{background:var(–gold-dark);color:#fff;}
+
+/* ── 時段選項 ── */
+.time-chips{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:502;}
+.time-chip{
+padding:10px 16px;
+border-radius:100px;
+border:1.5px solid #DDD;
+background:#FFFFFF;
+font-size:13px;
+color:#3D3D3D;
+cursor:pointer;
+user-select:none;
+-webkit-tap-highlight-color:transparent;
+position:relative;
+z-index:502;
+}
+.time-chip.active{background:#1A1A1A;border-color:#1A1A1A;color:#C9A84C;font-weight:500;}
+
+.btn-submit{width:100%;padding:15px;background:#C9A84C;border:none;border-radius:12px;font-family:‘Noto Serif TC’,serif;font-size:16px;font-weight:700;color:#1A1A1A;cursor:pointer;margin-top:8px;letter-spacing:1px;}
+.btn-submit:active{background:#9A7530;color:#fff;}
 .btn-submit:disabled{background:#ccc;color:#888;cursor:not-allowed;}
 .btn-cancel{width:100%;padding:12px;background:transparent;border:none;font-size:14px;color:#aaa;cursor:pointer;margin-top:8px;}
 
-/* SUCCESS */
 .success-box{text-align:center;padding:40px 20px;}
 .success-box .s-emoji{font-size:56px;margin-bottom:16px;}
-.success-box h3{font-family:‘Noto Serif TC’,serif;font-size:20px;font-weight:700;color:var(–ink);margin-bottom:8px;}
+.success-box h3{font-family:‘Noto Serif TC’,serif;font-size:20px;font-weight:700;color:#1A1A1A;margin-bottom:8px;}
 .success-box p{font-size:13px;color:#888;line-height:1.8;}
-
 html{scroll-behavior:smooth;}
 </style>
 
@@ -165,7 +189,7 @@ html{scroll-behavior:smooth;}
 
 <!-- MODAL -->
 
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalBox">
     <div class="modal-handle"></div>
     <div id="formArea">
@@ -182,7 +206,7 @@ html{scroll-behavior:smooth;}
       </div>
       <div class="form-group">
         <label class="form-label">希望看房時段（可複選）</label>
-        <div class="time-chips">
+        <div class="time-chips" id="timeChips">
           <div class="time-chip" data-val="平日上午">平日上午</div>
           <div class="time-chip" data-val="平日下午">平日下午</div>
           <div class="time-chip" data-val="平日晚上">平日晚上</div>
@@ -223,19 +247,19 @@ html{scroll-behavior:smooth;}
 
 <script>
 var SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vTXlS27w3RSA6QVdQV8EwHg0AUm2uXlcqsoNPKrqNsTKyuvxQNeuK5rD81KT4-qDLNcife2e_hYUj7g/pub?gid=0&single=true&output=csv';
-var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSfpoj8kzu2Ea9iA5O51BJcO9Nl6S1bS8iQpEAn4Y7ycs2g1eQ/formResponse';
+var FORM_ACTION='https://docs.google.com/forms/d/e/1FAIpQLSfpoj8kzu2Ea9iA5O51BJcO9Nl6S1bS8iQpEAn4Y7ycs2g1eQ/formResponse';
 
-// Google 表單欄位 entry ID（依照你表單的欄位順序）
-var ENTRY_NAME='entry.986989577';
-var ENTRY_PHONE='entry.2019511183';
-var ENTRY_TIME='entry.1217101094';
-var ENTRY_BUDGET='entry.1019503682';
-var ENTRY_QUESTION='entry.196273080';
-var ENTRY_PROP='entry.735557003';
+// ★ Google 表單 entry ID — 需要確認，先用佔位值
+var ENTRY={
+  name:'entry.1421160139',
+  phone:'entry.1915564233',
+  time:'entry.453865590',
+  budget:'entry.559465315',
+  question:'entry.180356946'
+};
 
 var allData=[],isDemo=false,currentPropTitle='';
 var filters={area:'',layout:'',size:'',budget:''};
-
 var DEMO_DATA=[
   {標題:'七期豪宅整層釋出',地區:'西屯區',格局:'4房',坪數:'58',價格:'3800',類型:'住宅',圖片:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80',說明:'精裝修，棟距佳，視野開闊，近秀泰廣場，生活機能頂佳。',物件連結:''},
   {標題:'北屯近崇德捷運口電梯大樓',地區:'北屯區',格局:'3房',坪數:'38',價格:'1080',類型:'住宅',圖片:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80',說明:'管理完善社區，機車位，近崇德路商圈，學區佳。',物件連結:''},
@@ -243,6 +267,7 @@ var DEMO_DATA=[
   {標題:'大里透天4房車庫',地區:'大里太平',格局:'4房',坪數:'45',價格:'1350',類型:'透天',圖片:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80',說明:'附雙車庫，花園，安靜社區，近大里高中。',物件連結:''},
 ];
 
+// 篩選 chips
 document.querySelectorAll('.chip-row').forEach(function(row){
   var key=row.id.replace('chips-','');
   row.querySelectorAll('.chip').forEach(function(chip){
@@ -254,8 +279,10 @@ document.querySelectorAll('.chip-row').forEach(function(row){
   });
 });
 
-document.querySelectorAll('.time-chip').forEach(function(chip){
-  chip.addEventListener('click',function(){chip.classList.toggle('active');});
+// 時段 chips — 用 touchend 確保 iOS 正常
+document.getElementById('timeChips').addEventListener('click',function(e){
+  var chip=e.target.closest('.time-chip');
+  if(chip){chip.classList.toggle('active');}
 });
 
 function resetAll(){
@@ -273,7 +300,7 @@ async function doSearch(){
   var results=allData.filter(function(p){return matchFilter(p);});
   if(results.length===0){ra.innerHTML='<div class="state-box"><div class="emoji">😔</div><p>找不到符合條件的物件<br>請試試調整篩選條件</p></div>';return;}
   var html='';
-  if(isDemo)html+='<div class="notice">⚠️ 目前顯示示範資料，Google Sheets 設定完成後即顯示真實物件。</div>';
+  if(isDemo)html+='<div class="notice">⚠️ 目前顯示示範資料。</div>';
   html+='<div class="result-header"><div class="result-count"><span>'+results.length+'</span>件符合物件</div></div>';
   results.forEach(function(p){html+=renderCard(p);});
   ra.innerHTML=html;
@@ -283,56 +310,32 @@ async function doSearch(){
 function matchFilter(p){
   if(filters.area&&p['地區']!==filters.area)return false;
   if(filters.layout&&p['格局']!==filters.layout)return false;
-  if(filters.size){
-    var s=parseFloat(p['坪數'])||0;
+  if(filters.size){var s=parseFloat(p['坪數'])||0;
     if(filters.size==='20以下'&&s>=20)return false;
     if(filters.size==='20-30'&&(s<20||s>=30))return false;
     if(filters.size==='30-40'&&(s<30||s>=40))return false;
     if(filters.size==='40-50'&&(s<40||s>=50))return false;
-    if(filters.size==='50以上'&&s<50)return false;
-  }
-  if(filters.budget){
-    var b=parseFloat(p['價格'])||0;
+    if(filters.size==='50以上'&&s<50)return false;}
+  if(filters.budget){var b=parseFloat(p['價格'])||0;
     if(filters.budget==='500以下'&&b>=500)return false;
     if(filters.budget==='500-800'&&(b<500||b>=800))return false;
     if(filters.budget==='800-1200'&&(b<800||b>=1200))return false;
     if(filters.budget==='1200-2000'&&(b<1200||b>=2000))return false;
-    if(filters.budget==='2000以上'&&b<2000)return false;
-  }
+    if(filters.budget==='2000以上'&&b<2000)return false;}
   return true;
 }
 
 async function loadData(){
-  try{
-    var r=await fetch(SHEET_CSV_URL);
-    var text=await r.text();
-    var parsed=parseCSV(text);
-    if(parsed.length>0){allData=parsed;isDemo=false;return;}
-  }catch(e){}
+  try{var r=await fetch(SHEET_CSV_URL);var text=await r.text();var p=parseCSV(text);if(p.length>0){allData=p;isDemo=false;return;}}catch(e){}
   allData=DEMO_DATA;isDemo=true;
 }
 
 function parseCSV(text){
-  var lines=text.trim().split('\n');
-  if(lines.length<2)return[];
+  var lines=text.trim().split('\n');if(lines.length<2)return[];
   var headers=lines[0].split(',').map(function(h){return h.trim().replace(/^"|"$/g,'');});
-  return lines.slice(1).map(function(line){
-    var vals=splitCSVLine(line),obj={};
-    headers.forEach(function(h,i){obj[h]=(vals[i]||'').trim().replace(/^"|"$/g,'');});
-    return obj;
-  }).filter(function(o){return o['標題'];});
+  return lines.slice(1).map(function(line){var vals=splitCSVLine(line),obj={};headers.forEach(function(h,i){obj[h]=(vals[i]||'').trim().replace(/^"|"$/g,'');});return obj;}).filter(function(o){return o['標題'];});
 }
-
-function splitCSVLine(line){
-  var result=[],cur='',inQ=false;
-  for(var i=0;i<line.length;i++){
-    if(line[i]==='"'){inQ=!inQ;continue;}
-    if(line[i]===','&&!inQ){result.push(cur);cur='';continue;}
-    cur+=line[i];
-  }
-  result.push(cur);
-  return result;
-}
+function splitCSVLine(line){var result=[],cur='',inQ=false;for(var i=0;i<line.length;i++){if(line[i]==='"'){inQ=!inQ;continue;}if(line[i]===','&&!inQ){result.push(cur);cur='';continue;}cur+=line[i];}result.push(cur);return result;}
 
 var slideStates={};
 function renderCard(p){
@@ -344,43 +347,19 @@ function renderCard(p){
   var photos=(p['圖片']||'').split('|').map(function(u){return u.trim();}).filter(function(u){return u;});
   var sh='';
   if(photos.length>0){
-    photos.forEach(function(url,i){sh+='<div class="slide'+(i===0?' active':'')+'"><img src="'+url+'" alt="物件照片" onerror="this.parentNode.innerHTML=\''+emoji+'\'"></div>';});
-    if(photos.length>1){
-      sh+='<button class="slide-prev" onclick="prevSlide(\''+cid+'\','+photos.length+')">&#8249;</button>';
-      sh+='<button class="slide-next" onclick="nextSlide(\''+cid+'\','+photos.length+')">&#8250;</button>';
-      sh+='<div class="slide-dots">';
-      photos.forEach(function(_,i){sh+='<div class="dot'+(i===0?' active':'')+'" onclick="goSlide(\''+cid+'\','+i+','+photos.length+')"></div>';});
-      sh+='</div>';
-    }
+    photos.forEach(function(url,i){sh+='<div class="slide'+(i===0?' active':'')+'"><img src="'+url+'" alt="" onerror="this.parentNode.innerHTML=\''+emoji+'\'"></div>';});
+    if(photos.length>1){sh+='<button class="slide-prev" onclick="prevSlide(\''+cid+'\','+photos.length+')">&#8249;</button><button class="slide-next" onclick="nextSlide(\''+cid+'\','+photos.length+')">&#8250;</button><div class="slide-dots">';photos.forEach(function(_,i){sh+='<div class="dot'+(i===0?' active':'')+'" onclick="goSlide(\''+cid+'\','+i+','+photos.length+')"></div>';});sh+='</div>';}
   }else{sh='<div class="slide active">'+emoji+'</div>';}
   slideStates[cid]=0;
   var hasLink=p['物件連結']&&p['物件連結'].length>0;
   var dBtn=hasLink?'<a class="btn-detail" href="'+p['物件連結']+'" target="_blank">🔗 詳細資訊</a>':'';
   var safeTitle=p['標題'].replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-  return '<div class="card" id="'+cid+'">'
-    +'<div class="card-slides">'+sh+'<span class="card-badge">'+(p['類型']||'住宅')+'</span></div>'
-    +'<div class="card-body">'
-    +'<div class="card-area">📍 '+p['地區']+'</div>'
-    +'<div class="card-title">'+p['標題']+'</div>'
-    +(desc?'<div class="card-desc">'+desc+'</div>':'')
-    +'<div class="card-tags">'
-    +(p['格局']?'<span class="tag">'+p['格局']+'</span>':'')
-    +(p['坪數']?'<span class="tag">'+p['坪數']+'坪</span>':'')
-    +'</div>'
-    +'<div class="card-price">'+priceStr+'<small>（總價）</small></div>'
-    +'<div class="card-footer">'+dBtn
-    +'<button class="btn-book" onclick="openModal(\''+safeTitle+'\')">📅 預約看房</button>'
-    +'</div></div></div>';
+  return '<div class="card" id="'+cid+'"><div class="card-slides">'+sh+'<span class="card-badge">'+(p['類型']||'住宅')+'</span></div><div class="card-body"><div class="card-area">📍 '+p['地區']+'</div><div class="card-title">'+p['標題']+'</div>'+(desc?'<div class="card-desc">'+desc+'</div>':'')+'<div class="card-tags">'+(p['格局']?'<span class="tag">'+p['格局']+'</span>':'')+(p['坪數']?'<span class="tag">'+p['坪數']+'坪</span>':'')+'</div><div class="card-price">'+priceStr+'<small>（總價）</small></div><div class="card-footer">'+dBtn+'<button class="btn-book" onclick="openModal(\''+safeTitle+'\')">📅 預約看房</button></div></div></div>';
 }
 
 function nextSlide(id,total){goSlide(id,((slideStates[id]||0)+1)%total,total);}
 function prevSlide(id,total){goSlide(id,((slideStates[id]||0)-1+total)%total,total);}
-function goSlide(id,idx,total){
-  var card=document.getElementById(id);if(!card)return;
-  card.querySelectorAll('.slide').forEach(function(s,i){s.classList.toggle('active',i===idx);});
-  card.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});
-  slideStates[id]=idx;
-}
+function goSlide(id,idx,total){var card=document.getElementById(id);if(!card)return;card.querySelectorAll('.slide').forEach(function(s,i){s.classList.toggle('active',i===idx);});card.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===idx);});slideStates[id]=idx;}
 
 function openModal(title){
   currentPropTitle=title;
@@ -398,40 +377,35 @@ function openModal(title){
   document.body.style.overflow='hidden';
 }
 
-function closeModal(e){if(e.target===document.getElementById('modalOverlay'))closeModalDirect();}
-function closeModalDirect(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+function closeModalDirect(){
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// 點遮罩關閉
+document.getElementById('modalOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeModalDirect();
+});
 
 async function submitBooking(){
   var name=document.getElementById('f-name').value.trim();
   var phone=document.getElementById('f-phone').value.trim();
   if(!name||!phone){alert('請填寫姓名和電話！');return;}
-
   var times=[];
   document.querySelectorAll('.time-chip.active').forEach(function(c){times.push(c.getAttribute('data-val'));});
   var budget=document.getElementById('f-budget').value;
   var question=document.getElementById('f-question').value.trim();
-
   var btn=document.getElementById('submitBtn');
-  btn.disabled=true;
-  btn.textContent='送出中...';
-
+  btn.disabled=true;btn.textContent='送出中...';
   try{
     var body=new URLSearchParams();
-    body.append(ENTRY_NAME, name);
-    body.append(ENTRY_PHONE, phone);
-    body.append(ENTRY_TIME, times.join('、'));
-    body.append(ENTRY_BUDGET, budget);
-    body.append(ENTRY_QUESTION, question);
-    body.append(ENTRY_PROP, currentPropTitle);
-
-    await fetch(FORM_URL, {
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body: body.toString()
-    });
+    body.append(ENTRY.name,name);
+    body.append(ENTRY.phone,phone);
+    body.append(ENTRY.time,times.length?times.join('、'):'未選擇');
+    body.append(ENTRY.budget,budget||'未填');
+    body.append(ENTRY.question,question||'無');
+    await fetch(FORM_ACTION,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
   }catch(e){}
-
   document.getElementById('formArea').style.display='none';
   document.getElementById('successArea').style.display='block';
 }
